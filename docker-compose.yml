@@ -21,7 +21,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "${PORT:-8080}:${PORT:-8080}"
-      - "2345:2345" 
     depends_on:
       postgres:
         condition: service_healthy
@@ -36,9 +35,7 @@ services:
       - go-mod-cache:/go/pkg/mod
     env_file: .env
     networks:
-        - app-network
-        - documenso-rentdaddy
-    #command: ["/bin/sh", "-c", "chmod +x /app/entrypoint.sh && chown root:root /app/entrypoint.sh && /app/entrypoint.sh"]
+        - app-network    #command: ["/bin/sh", "-c", "chmod +x /app/entrypoint.sh && chown root:root /app/entrypoint.sh && /app/entrypoint.sh"]
     
 
   frontend:
@@ -58,9 +55,6 @@ services:
 networks:
   app-network:
     driver: bridge
-  documenso-rentdaddy:
-    external: true
 
 volumes:
   postgres_data:
-  go-mod-cache:
